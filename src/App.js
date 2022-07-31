@@ -9,15 +9,15 @@ export default class App extends Component {
     return (
       <Container fluid>
         <Row>
-          <Col className="p-0" sm={12} lg={3}>
+          <Col className="p-0" sm={12} md={2} lg={3} xl={3}>
             A
           </Col>
-          <Col className="p-0" sm={12} lg={6}>
+          <Col className="p-0" sm={12} md={8} lg={6} xl={5}>
             <PersonalForm />
             <EducationForm />
             <ExperienceForm />
           </Col>
-          <Col className="p-0" sm={12} lg={3}>
+          <Col className="p-0" sm={12} md={2} lg={3} xl={3}>
             C
           </Col>
         </Row>
