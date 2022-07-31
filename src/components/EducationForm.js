@@ -2,18 +2,52 @@ import React, { Component } from "react";
 import { Col, Row, Button, Form, Card } from "react-bootstrap";
 
 export default class EducationForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      validated: false,
+    };
+
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    if (form.checkValidity()) {
+      const { validated, ...formParams } = this.state;
+      console.log(formParams);
+    }
+
+    this.setState({
+      validated: true,
+    });
+  }
+
+  onChange(e) {
+    this.setState({
+      [e.target.id]: e.target.value.trim(),
+    });
+  }
+
   render() {
     return (
       <Card>
         <Card.Body>
           <Card.Title>Education</Card.Title>
           <hr />
-          <Form>
+          <Form
+            noValidate
+            validated={this.state.validated}
+            onSubmit={this.onSubmit}
+          >
             <Row>
               <Col sm={12} md={6}>
-                <Form.Group className="mb-3" controlId="institution-name">
+                <Form.Group className="mb-3" controlId="institutionName">
                   <Form.Label>Name of institution</Form.Label>
                   <Form.Control
+                    onChange={this.onChange}
                     type="text"
                     placeholder="Institution"
                     required
@@ -21,9 +55,10 @@ export default class EducationForm extends Component {
                 </Form.Group>
               </Col>
               <Col sm={12} md={6}>
-                <Form.Group className="mb-3" controlId="field-of-study">
+                <Form.Group className="mb-3" controlId="fieldOfStudy">
                   <Form.Label>Field of study</Form.Label>
                   <Form.Control
+                    onChange={this.onChange}
                     type="text"
                     placeholder="Field of study"
                     required
@@ -33,7 +68,7 @@ export default class EducationForm extends Component {
               <Col sm={12} md={6}>
                 <Form.Group className="mb-3" controlId="degree">
                   <Form.Label>Degree</Form.Label>
-                  <Form.Select>
+                  <Form.Select onChange={this.onChange}>
                     <option>A.A.</option>
                     <option>A.S.</option>
                     <option>B.A.</option>
@@ -49,15 +84,15 @@ export default class EducationForm extends Component {
             </Row>
             <Row>
               <Col>
-                <Form.Group className="mb-3" controlId="start-date">
+                <Form.Group className="mb-3" controlId="startDate">
                   <Form.Label>Start Date</Form.Label>
-                  <Form.Control type="date" required />
+                  <Form.Control onChange={this.onChange} type="date" required />
                 </Form.Group>
               </Col>
               <Col>
-                <Form.Group className="mb-3" controlId="end-date">
+                <Form.Group className="mb-3" controlId="graduationDate">
                   <Form.Label>Graduation Date</Form.Label>
-                  <Form.Control type="date" required />
+                  <Form.Control onChange={this.onChange} type="date" required />
                 </Form.Group>
               </Col>
             </Row>
