@@ -17,7 +17,7 @@ export default class ExperienceForm extends Component {
     const form = e.currentTarget;
     if (form.checkValidity()) {
       const { validated, ...formParams } = this.state;
-      console.log(formParams);
+      this.props.onValidSubmit({ experience: formParams });
     }
 
     this.setState({

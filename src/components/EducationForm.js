@@ -17,7 +17,7 @@ export default class EducationForm extends Component {
     const form = e.currentTarget;
     if (form.checkValidity()) {
       const { validated, ...formParams } = this.state;
-      console.log(formParams);
+      this.props.onValidSubmit({ education: formParams });
     }
 
     this.setState({

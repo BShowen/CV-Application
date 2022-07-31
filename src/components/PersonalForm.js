@@ -17,6 +17,7 @@ export default class PersonalForm extends Component {
     const form = e.currentTarget;
     if (form.checkValidity()) {
       const { validated, ...formParams } = this.state;
+      this.props.onValidSubmit({ personalInfo: formParams });
     }
 
     this.setState({
