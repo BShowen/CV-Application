@@ -72,12 +72,23 @@ export default class App extends Component {
     ][this.state.progress];
   }
 
+  canDisplayForm() {
+    if (this.state.progress === 0 && this.state.formData[0].length > 0) {
+      return false;
+    } else {
+      return this.state.showForm;
+    }
+  }
+
   render() {
-    const canDisplayForm = this.state.showForm;
+    const canDisplayForm = this.canDisplayForm();
     const canDisplayNavigationButtons = !this.state.showForm;
     const displayFormData =
       this.state.formData[this.state.progress].length > 0 &&
       !this.state.showForm;
+
+    const isFormDisabled =
+      this.state.progress === 0 && this.state.formData[0].length > 0;
     return (
       <Container fluid>
         <Row>
@@ -88,7 +99,10 @@ export default class App extends Component {
               {canDisplayNavigationButtons && (
                 <ProgressButtonGroup
                   buttonName={this.currentStepForm().type.name.toLowerCase()}
-                  onAddClick={this.showForm}
+                  onAddClick={{
+                    handler: this.showForm,
+                    disabled: isFormDisabled,
+                  }}
                   onContinueClick={this.nextStep}
                   onPreviousClick={this.previousStep}
                 />

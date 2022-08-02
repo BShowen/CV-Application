@@ -3,9 +3,12 @@ import { Stack, Button } from "react-bootstrap";
 
 export default class ProgressButtonGroup extends Component {
   render() {
+    const {
+      onAddClick: { handler, disabled },
+    } = this.props;
     return (
       <Stack gap="3">
-        <Button variant="primary" size="lg" onClick={this.props.onAddClick}>
+        <Button variant="primary" size="lg" onClick={disabled ? null : handler}>
           Add {this.props.buttonName} information
         </Button>
         <Button
