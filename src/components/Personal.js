@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Col, Row, Button, Form, Card } from "react-bootstrap";
 
-export default class PersonalForm extends Component {
+export default class Personal extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,7 +17,7 @@ export default class PersonalForm extends Component {
     const form = e.currentTarget;
     if (form.checkValidity()) {
       const { validated, ...formParams } = this.state;
-      this.props.onValidSubmit({ personalInfo: formParams });
+      this.props.submit({ personalInfo: formParams });
     }
 
     this.setState({
@@ -93,6 +93,9 @@ export default class PersonalForm extends Component {
 
             <Button variant="primary" type="submit">
               Submit
+            </Button>
+            <Button variant="danger" type="button" onClick={this.props.cancel}>
+              Cancel
             </Button>
           </Form>
         </Card.Body>

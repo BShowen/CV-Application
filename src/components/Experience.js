@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Col, Row, Button, Form, Card } from "react-bootstrap";
 
-export default class ExperienceForm extends Component {
+export default class Experience extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,7 +17,7 @@ export default class ExperienceForm extends Component {
     const form = e.currentTarget;
     if (form.checkValidity()) {
       const { validated, ...formParams } = this.state;
-      this.props.onValidSubmit({ experience: formParams });
+      this.props.submit({ experience: formParams });
     }
 
     this.setState({
@@ -95,6 +95,9 @@ export default class ExperienceForm extends Component {
             </Row>
             <Button variant="primary" type="submit">
               Submit
+            </Button>
+            <Button variant="danger" type="button" onClick={this.props.cancel}>
+              Cancel
             </Button>
           </Form>
         </Card.Body>
