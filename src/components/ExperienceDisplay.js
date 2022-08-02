@@ -1,31 +1,67 @@
 import React, { Component } from "react";
-import { Col, Row, Card } from "react-bootstrap";
+import { Col, Row, Card, Form } from "react-bootstrap";
 
 export default class Experience extends Component {
   render() {
     return (
       <Card>
-        <Card.Header>Experience</Card.Header>
+        <Card.Header as="h5">Experience</Card.Header>
         <Card.Body>
           <Row>
             <Col sm={12} md={6}>
-              <Card.Text>{this.props.data.companyName}</Card.Text>
+              <Form.Group>
+                <Form.Label>Company Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder={this.props.data.companyName}
+                  disabled
+                />
+              </Form.Group>
             </Col>
             <Col sm={12} md={6}>
-              <Card.Text>{this.props.data.jobTitle}</Card.Text>
+              <Form.Group>
+                <Form.Label>Job Title</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder={this.props.data.jobTitle}
+                  disabled
+                />
+              </Form.Group>
             </Col>
           </Row>
           <Row>
             <Col>
-              <Card.Text>{this.props.data.startDate}</Card.Text>
+              <Form.Group>
+                <Form.Label>Start Date</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder={this.props.data.startDate}
+                  disabled
+                />
+              </Form.Group>
             </Col>
             <Col>
-              <Card.Text>{this.props.data.endDate}</Card.Text>
+              <Form.Group>
+                <Form.Label>End Date</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder={this.props.data.endDate}
+                  disabled
+                />
+              </Form.Group>
             </Col>
           </Row>
           <Row>
             <Col>
-              <Card.Text>{this.props.data.jobDescription}</Card.Text>
+              <Form.Group>
+                <Form.Label>Job Description</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows="5"
+                  placeholder={this.props.data.jobDescription}
+                  disabled
+                />
+              </Form.Group>
             </Col>
           </Row>
         </Card.Body>
