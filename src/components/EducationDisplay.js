@@ -1,12 +1,19 @@
 import React, { Component } from "react";
 import { Col, Row, Card, Form } from "react-bootstrap";
+import CardHeader from "./CardHeader";
 
 export default class Education extends Component {
   render() {
     return (
       <Card>
         <Form>
-          <Card.Header as="h5">Education</Card.Header>
+          <CardHeader
+            headerTitle="Education"
+            deleteHandler={this.props.deleteHandler.bind(
+              null,
+              this.props.data.id
+            )}
+          />
           <Card.Body>
             <Row>
               <Col sm={12} md={6}>

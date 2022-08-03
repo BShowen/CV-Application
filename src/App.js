@@ -13,6 +13,7 @@ export default class App extends Component {
     this.state = {
       showForm: false,
       progress: 0,
+      id: 0,
       formData: { 0: [], 1: [], 2: [] },
     };
 
@@ -21,15 +22,19 @@ export default class App extends Component {
     this.showForm = this.showForm.bind(this);
     this.nextStep = this.nextStep.bind(this);
     this.previousStep = this.previousStep.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
 
   handleSubmit(formData) {
     this.setState({
+      id: this.state.id + 1,
       showForm: false,
       formData: {
         ...this.state.formData,
-        [this.state.progress]:
-          this.state.formData[this.state.progress].concat(formData),
+        [this.state.progress]: this.state.formData[this.state.progress].concat({
+          ...formData,
+          id: this.state.id,
+        }),
       },
     });
   }
@@ -80,6 +85,17 @@ export default class App extends Component {
     }
   }
 
+  deleteItem(id) {
+    this.setState({
+      formData: {
+        ...this.state.formData,
+        [this.state.progress]: this.state.formData[this.state.progress].filter(
+          (data) => data.id !== id
+        ),
+      },
+    });
+  }
+
   render() {
     const canDisplayForm = this.canDisplayForm();
     const canDisplayNavigationButtons = !this.state.showForm;
@@ -111,6 +127,7 @@ export default class App extends Component {
                 <DisplayFormData
                   data={this.state.formData[this.state.progress]}
                   progress={this.state.progress}
+                  clickHandlers={{ onDelete: this.deleteItem }}
                 />
               )}
             </Stack>

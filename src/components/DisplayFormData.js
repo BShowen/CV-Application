@@ -4,24 +4,30 @@ import ExperienceDisplay from "./ExperienceDisplay";
 import EducationDisplay from "./EducationDisplay";
 
 export default class DisplayFormData extends Component {
-  getDisplayComponent(key, data) {
+  getDisplayComponent(data) {
     return [
-      <PersonalDisplay key={key} data={data} />,
-      <EducationDisplay key={key} data={data} />,
-      <ExperienceDisplay key={key} data={data} />,
+      <PersonalDisplay
+        key={data.id}
+        data={data}
+        deleteHandler={this.props.clickHandlers.onDelete}
+      />,
+      <EducationDisplay
+        key={data.id}
+        data={data}
+        deleteHandler={this.props.clickHandlers.onDelete}
+      />,
+      <ExperienceDisplay
+        key={data.id}
+        data={data}
+        deleteHandler={this.props.clickHandlers.onDelete}
+      />,
     ][this.props.progress];
   }
 
   getFormDisplay() {
     const formDisplays = [];
-    let i = 0;
-    this.props.data.forEach((formSubmission) => {
-      for (const formName in formSubmission) {
-        formDisplays.push(
-          this.getDisplayComponent(i, formSubmission[formName])
-        );
-      }
-      i++;
+    this.props.data.forEach((formData) => {
+      formDisplays.push(this.getDisplayComponent(formData));
     });
     return formDisplays;
   }

@@ -17,7 +17,7 @@ export default class Personal extends Component {
     const form = e.currentTarget;
     if (form.checkValidity()) {
       const { validated, ...formParams } = this.state;
-      this.props.submit({ personalInfo: formParams });
+      this.props.submit(formParams);
     }
 
     this.setState({
