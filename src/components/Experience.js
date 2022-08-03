@@ -5,6 +5,7 @@ export default class Experience extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      ...this.props.defaultValues,
       validated: false,
     };
 
@@ -27,7 +28,7 @@ export default class Experience extends Component {
 
   onChange(e) {
     this.setState({
-      [e.target.id]: e.target.value.trim(),
+      [e.target.id]: e.target.value,
     });
   }
 
@@ -50,6 +51,7 @@ export default class Experience extends Component {
                     onChange={this.onChange}
                     type="text"
                     placeholder="Company name"
+                    value={this.state.companyName || ""}
                     required
                   />
                 </Form.Group>
@@ -61,6 +63,7 @@ export default class Experience extends Component {
                     onChange={this.onChange}
                     type="text"
                     placeholder="Job Title"
+                    value={this.state.jobTitle || ""}
                     required
                   />
                 </Form.Group>
@@ -70,13 +73,23 @@ export default class Experience extends Component {
               <Col>
                 <Form.Group className="mb-3" controlId="startDate">
                   <Form.Label>Start Date</Form.Label>
-                  <Form.Control onChange={this.onChange} type="date" required />
+                  <Form.Control
+                    onChange={this.onChange}
+                    type="date"
+                    value={this.state.startDate || ""}
+                    required
+                  />
                 </Form.Group>
               </Col>
               <Col>
                 <Form.Group className="mb-3" controlId="endDate">
                   <Form.Label>End Date</Form.Label>
-                  <Form.Control onChange={this.onChange} type="date" required />
+                  <Form.Control
+                    onChange={this.onChange}
+                    type="date"
+                    value={this.state.endDate || ""}
+                    required
+                  />
                 </Form.Group>
               </Col>
             </Row>
@@ -86,6 +99,7 @@ export default class Experience extends Component {
                   <Form.Label>Job Description</Form.Label>
                   <Form.Control
                     onChange={this.onChange}
+                    value={this.state.jobDescription || ""}
                     required
                     as="textarea"
                     rows="5"

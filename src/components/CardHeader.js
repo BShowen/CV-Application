@@ -26,6 +26,7 @@ export default class CardHeader extends Component {
           <Button
             variant="secondary"
             style={{ ...style, justifyContent: "center" }}
+            onClick={this.props.editHandler}
           >
             <PencilSquare size={20} className="text-light" />
           </Button>

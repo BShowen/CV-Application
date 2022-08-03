@@ -5,6 +5,7 @@ export default class Personal extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      ...this.props.defaultValues,
       validated: false,
     };
 
@@ -27,7 +28,7 @@ export default class Personal extends Component {
 
   onChange(e) {
     this.setState({
-      [e.target.id]: e.target.value.trim(),
+      [e.target.id]: e.target.value,
     });
   }
 
@@ -50,6 +51,7 @@ export default class Personal extends Component {
                     onChange={this.onChange}
                     type="text"
                     placeholder="First name"
+                    value={this.state.firstName || ""}
                     required
                   />
                 </Form.Group>
@@ -60,8 +62,9 @@ export default class Personal extends Component {
                   <Form.Control
                     onChange={this.onChange}
                     type="text"
-                    required
                     placeholder="Last name"
+                    value={this.state.lastName || ""}
+                    required
                   />
                 </Form.Group>
               </Col>
@@ -73,8 +76,9 @@ export default class Personal extends Component {
                   <Form.Control
                     onChange={this.onChange}
                     type="tel"
-                    required
                     placeholder="(123) 555-5555"
+                    value={this.state.phoneNumber || ""}
+                    required
                   />
                 </Form.Group>
               </Col>
@@ -84,8 +88,9 @@ export default class Personal extends Component {
                   <Form.Control
                     onChange={this.onChange}
                     type="email"
-                    required
                     placeholder="Email"
+                    value={this.state.email || ""}
+                    required
                   />
                 </Form.Group>
               </Col>

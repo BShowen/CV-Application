@@ -10,16 +10,19 @@ export default class DisplayFormData extends Component {
         key={data.id}
         data={data}
         deleteHandler={this.props.clickHandlers.onDelete}
+        editHandler={this.props.clickHandlers.onEdit}
       />,
       <EducationDisplay
         key={data.id}
         data={data}
         deleteHandler={this.props.clickHandlers.onDelete}
+        editHandler={this.props.clickHandlers.onEdit}
       />,
       <ExperienceDisplay
         key={data.id}
         data={data}
         deleteHandler={this.props.clickHandlers.onDelete}
+        editHandler={this.props.clickHandlers.onEdit}
       />,
     ][this.props.progress];
   }

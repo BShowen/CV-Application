@@ -23,9 +23,36 @@ export default class App extends Component {
     this.nextStep = this.nextStep.bind(this);
     this.previousStep = this.previousStep.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
+    this.editItem = this.editItem.bind(this);
   }
 
   handleSubmit(formData) {
+    if (formData.id !== undefined) {
+      formData.editForm = undefined; //So the edit form doesn't keep rendering
+      this.updateData(formData);
+    } else {
+      this.saveData(formData);
+    }
+  }
+
+  updateData(formData) {
+    this.setState({
+      showForm: false,
+      formData: {
+        ...this.state.formData,
+        [this.state.progress]: this.state.formData[this.state.progress].map(
+          (data) => {
+            if (data.id === formData.id) {
+              data = { ...data, ...formData };
+            }
+            return data;
+          }
+        ),
+      },
+    });
+  }
+
+  saveData(formData) {
     this.setState({
       id: this.state.id + 1,
       showForm: false,
@@ -34,6 +61,7 @@ export default class App extends Component {
         [this.state.progress]: this.state.formData[this.state.progress].concat({
           ...formData,
           id: this.state.id,
+          editForm: undefined,
         }),
       },
     });
@@ -48,6 +76,17 @@ export default class App extends Component {
   hideForm() {
     this.setState({
       showForm: false,
+      formData: {
+        ...this.state.formData,
+        [this.state.progress]: this.state.formData[this.state.progress].map(
+          (data) => {
+            if (data.editForm) {
+              data.editForm = undefined;
+            }
+            return data;
+          }
+        ),
+      },
     });
   }
 
@@ -69,11 +108,23 @@ export default class App extends Component {
     }
   }
 
-  currentStepForm() {
+  currentStepForm(defaultValues = {}) {
     return [
-      <Personal cancel={this.hideForm} submit={this.handleSubmit} />,
-      <Education cancel={this.hideForm} submit={this.handleSubmit} />,
-      <Experience cancel={this.hideForm} submit={this.handleSubmit} />,
+      <Personal
+        cancel={this.hideForm}
+        submit={this.handleSubmit}
+        defaultValues={defaultValues}
+      />,
+      <Education
+        cancel={this.hideForm}
+        submit={this.handleSubmit}
+        defaultValues={defaultValues}
+      />,
+      <Experience
+        cancel={this.hideForm}
+        submit={this.handleSubmit}
+        defaultValues={defaultValues}
+      />,
     ][this.state.progress];
   }
 
@@ -83,6 +134,13 @@ export default class App extends Component {
     } else {
       return this.state.showForm;
     }
+  }
+
+  canDisplayFormData() {
+    return (
+      this.state.formData[this.state.progress].length > 0 &&
+      !this.state.showForm
+    );
   }
 
   deleteItem(id) {
@@ -96,12 +154,26 @@ export default class App extends Component {
     });
   }
 
+  editItem(id) {
+    this.setState({
+      formData: {
+        ...this.state.formData,
+        [this.state.progress]: this.state.formData[this.state.progress].map(
+          (formData) => {
+            if (formData.id === id) {
+              formData.editForm = this.currentStepForm(formData);
+            }
+            return formData;
+          }
+        ),
+      },
+    });
+  }
+
   render() {
     const canDisplayForm = this.canDisplayForm();
     const canDisplayNavigationButtons = !this.state.showForm;
-    const displayFormData =
-      this.state.formData[this.state.progress].length > 0 &&
-      !this.state.showForm;
+    const displayFormData = this.canDisplayFormData();
 
     const isFormDisabled =
       this.state.progress === 0 && this.state.formData[0].length > 0;
@@ -127,7 +199,10 @@ export default class App extends Component {
                 <DisplayFormData
                   data={this.state.formData[this.state.progress]}
                   progress={this.state.progress}
-                  clickHandlers={{ onDelete: this.deleteItem }}
+                  clickHandlers={{
+                    onDelete: this.deleteItem,
+                    onEdit: this.editItem,
+                  }}
                 />
               )}
             </Stack>

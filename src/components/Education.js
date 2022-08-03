@@ -5,6 +5,8 @@ export default class Education extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      ...this.props.defaultValues,
+      degree: this.props.defaultValues.degree || "A.A.",
       validated: false,
     };
 
@@ -27,7 +29,7 @@ export default class Education extends Component {
 
   onChange(e) {
     this.setState({
-      [e.target.id]: e.target.value.trim(),
+      [e.target.id]: e.target.value,
     });
   }
 
@@ -50,6 +52,7 @@ export default class Education extends Component {
                     onChange={this.onChange}
                     type="text"
                     placeholder="Institution"
+                    value={this.state.institutionName || ""}
                     required
                   />
                 </Form.Group>
@@ -61,6 +64,7 @@ export default class Education extends Component {
                     onChange={this.onChange}
                     type="text"
                     placeholder="Field of study"
+                    value={this.state.fieldOfStudy || ""}
                     required
                   />
                 </Form.Group>
@@ -68,7 +72,10 @@ export default class Education extends Component {
               <Col sm={12} md={6}>
                 <Form.Group className="mb-3" controlId="degree">
                   <Form.Label>Degree</Form.Label>
-                  <Form.Select onChange={this.onChange}>
+                  <Form.Select
+                    onChange={this.onChange}
+                    value={this.state.degree || ""}
+                  >
                     <option>A.A.</option>
                     <option>A.S.</option>
                     <option>B.A.</option>
@@ -86,13 +93,23 @@ export default class Education extends Component {
               <Col>
                 <Form.Group className="mb-3" controlId="startDate">
                   <Form.Label>Start Date</Form.Label>
-                  <Form.Control onChange={this.onChange} type="date" required />
+                  <Form.Control
+                    onChange={this.onChange}
+                    type="date"
+                    value={this.state.startDate || ""}
+                    required
+                  />
                 </Form.Group>
               </Col>
               <Col>
                 <Form.Group className="mb-3" controlId="graduationDate">
                   <Form.Label>Graduation Date</Form.Label>
-                  <Form.Control onChange={this.onChange} type="date" required />
+                  <Form.Control
+                    onChange={this.onChange}
+                    type="date"
+                    value={this.state.graduationDate || ""}
+                    required
+                  />
                 </Form.Group>
               </Col>
             </Row>

@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import { Col, Row, Card, Form } from "react-bootstrap";
 import CardHeader from "./CardHeader";
 
-export default class Personal extends Component {
+export default class PersonalDisplay extends Component {
   render() {
+    if (this.props.data.editForm) {
+      return this.props.data.editForm;
+    }
     return (
       <Card>
         <Form>
@@ -13,6 +16,7 @@ export default class Personal extends Component {
               null,
               this.props.data.id
             )}
+            editHandler={this.props.editHandler.bind(null, this.props.data.id)}
           />
           <Card.Body>
             <Row>
