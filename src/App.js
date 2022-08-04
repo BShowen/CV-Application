@@ -5,6 +5,8 @@ import Education from "./components/Education";
 import Experience from "./components/Experience";
 import ProgressButtonGroup from "./components/ProgressButtonGroup";
 import DisplayFormData from "./components/DisplayFormData";
+import SideNav from "./components/SideNav";
+import "./styles/App.css";
 
 export default class App extends Component {
   constructor() {
@@ -177,11 +179,24 @@ export default class App extends Component {
 
     const isFormDisabled =
       this.state.progress === 0 && this.state.formData[0].length > 0;
+
+    const containerStyle = {
+      display: "flex",
+      flexDirection: "column",
+    };
+
     return (
-      <Container fluid>
-        <Row>
-          <Col className="p-0" sm={12} md={2} lg={3} xl={3}></Col>
-          <Col className="p-0 mt-5" sm={12} md={8} lg={6} xl={5}>
+      <Container style={containerStyle} fluid className="h-100">
+        <Row className="responsive-row-height">
+          <Col
+            className="p-0 responsive-col-height bg-light"
+            sm={12}
+            md={2}
+            lg={3}
+          >
+            <SideNav progress={this.state.progress} />
+          </Col>
+          <Col className="p-10 mh-100 overflow-scroll" sm={12} md={8} lg={6}>
             <Stack gap={3}>
               {canDisplayForm && this.currentStepForm()}
               {canDisplayNavigationButtons && (
@@ -207,7 +222,7 @@ export default class App extends Component {
               )}
             </Stack>
           </Col>
-          <Col className="p-0" sm={12} md={2} lg={3} xl={3}></Col>
+          <Col className="p-0" sm={12} md={2} lg={3}></Col>
         </Row>
       </Container>
     );
