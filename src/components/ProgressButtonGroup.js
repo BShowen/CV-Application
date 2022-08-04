@@ -8,23 +8,32 @@ export default class ProgressButtonGroup extends Component {
     } = this.props;
     return (
       <Stack gap="3">
-        <Button variant="primary" size="lg" onClick={disabled ? null : handler}>
+        <Button variant="success" size="lg" onClick={disabled ? null : handler}>
           Add {this.props.buttonName} information
         </Button>
         <Button
-          variant="success"
+          variant="primary"
           size="lg"
           onClick={this.props.onContinueClick}
         >
           Next Step
         </Button>
         <Button
-          variant="success"
+          variant="primary"
           onClick={this.props.onPreviousClick}
           size="lg"
         >
           Previous Step
         </Button>
+        {this.props.progress === 2 && (
+          <Button
+            size="lg"
+            variant="success"
+            onClick={this.props.onCompleteClick}
+          >
+            Complete
+          </Button>
+        )}
       </Stack>
     );
   }

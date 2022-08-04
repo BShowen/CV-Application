@@ -7,6 +7,7 @@ import ProgressButtonGroup from "./components/ProgressButtonGroup";
 import DisplayFormData from "./components/DisplayFormData";
 import SideNav from "./components/SideNav";
 import "./styles/App.css";
+import CurriculumVitae from "./components/CurriculumVitae";
 
 export default class App extends Component {
   constructor() {
@@ -17,6 +18,7 @@ export default class App extends Component {
       progress: 0,
       id: 0,
       formData: { 0: [], 1: [], 2: [] },
+      complete: false,
     };
 
     this.hideForm = this.hideForm.bind(this);
@@ -26,6 +28,7 @@ export default class App extends Component {
     this.previousStep = this.previousStep.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
     this.editItem = this.editItem.bind(this);
+    this.complete = this.complete.bind(this);
   }
 
   handleSubmit(formData) {
@@ -172,6 +175,12 @@ export default class App extends Component {
     });
   }
 
+  complete() {
+    this.setState({
+      complete: true,
+    });
+  }
+
   render() {
     const canDisplayForm = this.canDisplayForm();
     const canDisplayNavigationButtons = !this.state.showForm;
@@ -185,46 +194,52 @@ export default class App extends Component {
       flexDirection: "column",
     };
 
-    return (
-      <Container style={containerStyle} fluid className="h-100">
-        <Row className="responsive-row-height">
-          <Col
-            className="p-0 responsive-col-height bg-light"
-            sm={12}
-            md={2}
-            lg={3}
-          >
-            <SideNav progress={this.state.progress} />
-          </Col>
-          <Col className="p-10 mh-100 overflow-scroll" sm={12} md={8} lg={6}>
-            <Stack gap={3}>
-              {canDisplayForm && this.currentStepForm()}
-              {canDisplayNavigationButtons && (
-                <ProgressButtonGroup
-                  buttonName={this.currentStepForm().type.name.toLowerCase()}
-                  onAddClick={{
-                    handler: this.showForm,
-                    disabled: isFormDisabled,
-                  }}
-                  onContinueClick={this.nextStep}
-                  onPreviousClick={this.previousStep}
-                />
-              )}
-              {displayFormData && (
-                <DisplayFormData
-                  data={this.state.formData[this.state.progress]}
-                  progress={this.state.progress}
-                  clickHandlers={{
-                    onDelete: this.deleteItem,
-                    onEdit: this.editItem,
-                  }}
-                />
-              )}
-            </Stack>
-          </Col>
-          <Col className="p-0" sm={12} md={2} lg={3}></Col>
-        </Row>
-      </Container>
-    );
+    if (!this.state.complete) {
+      return (
+        <Container style={containerStyle} fluid className="h-100">
+          <Row className="responsive-row-height">
+            <Col
+              className="p-0 responsive-col-height bg-light"
+              sm={12}
+              md={2}
+              lg={3}
+            >
+              <SideNav progress={this.state.progress} />
+            </Col>
+            <Col className="p-10 mh-100 overflow-scroll" sm={12} md={8} lg={6}>
+              <Stack gap={3}>
+                {canDisplayForm && this.currentStepForm()}
+                {canDisplayNavigationButtons && (
+                  <ProgressButtonGroup
+                    buttonName={this.currentStepForm().type.name.toLowerCase()}
+                    onAddClick={{
+                      handler: this.showForm,
+                      disabled: isFormDisabled,
+                    }}
+                    onContinueClick={this.nextStep}
+                    onPreviousClick={this.previousStep}
+                    onCompleteClick={this.complete}
+                    progress={this.state.progress}
+                  />
+                )}
+                {displayFormData && (
+                  <DisplayFormData
+                    data={this.state.formData[this.state.progress]}
+                    progress={this.state.progress}
+                    clickHandlers={{
+                      onDelete: this.deleteItem,
+                      onEdit: this.editItem,
+                    }}
+                  />
+                )}
+              </Stack>
+            </Col>
+            <Col className="p-0" sm={12} md={2} lg={3}></Col>
+          </Row>
+        </Container>
+      );
+    } else {
+      return <CurriculumVitae data={this.state.formData} />;
+    }
   }
 }
