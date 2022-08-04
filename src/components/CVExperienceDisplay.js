@@ -3,6 +3,22 @@ import { Container } from "react-bootstrap";
 
 export default class CVExperienceDisplay extends Component {
   dataCards(dataArray) {
+    const defaultData = [
+      {
+        companyName: "Florida Hospital",
+        jobTitle: "Chief marketing officer",
+        startDate: "02/21/2019",
+        endDate: "2022/08/04",
+      },
+      {
+        companyName: "Orlando Federal Credit Union",
+        jobTitle: "VP marketing",
+        startDate: "2015/08/03",
+        endDate: "2019/02/09",
+      },
+    ];
+    if (dataArray.length === 0) dataArray = dataArray.concat(defaultData);
+
     return dataArray.map((dataObject, i) => {
       return (
         <Container key={i} className="ps-3 m-0">

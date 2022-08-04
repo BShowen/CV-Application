@@ -3,6 +3,23 @@ import { Container } from "react-bootstrap";
 
 export default class CVEducationDisplay extends Component {
   dataCards(dataArray) {
+    const defaultData = [
+      {
+        institutionName: "University of Central Florida",
+        degree: "B.S.",
+        fieldOfStudy: "Business Administration",
+        startDate: "2013/01/15",
+        graduationDate: "2015/06/11",
+      },
+      {
+        institutionName: "Seminole State College",
+        degree: "A.S.",
+        fieldOfStudy: "Marketing",
+        startDate: "2010/08/07",
+        graduationDate: "2012/12/07",
+      },
+    ];
+    if (dataArray.length === 0) dataArray = dataArray.concat(defaultData);
     return dataArray.map((dataObject, i) => {
       return (
         <Container key={i} className="ps-3 m-0">
