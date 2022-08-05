@@ -1,70 +1,36 @@
-# Getting Started with Create React App
+## Project: CV Creator 
+I created a simple application that helps you build a CV.
+###### View this app live [here](https://bshowen.github.io/CV-Application/)
+## Intention: To familiarize myself with React 
+My goal with this application was to start learning about React. I used the create-react-app tool to initialize my application and then I used react-bootstrap for my components. 
+# What I learned in this project. 
+- How to use the create-react-app tool
+- How to use and render React components with JSX. 
+- I learned how components have and update their state, how they receive props, callbacks, etc. 
+- I created some of my own components to keep my code DRY. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Notes for myself
+- Components with inline styling.
+  - use <strong>camelCase</strong> for CSS style names that are <strong>kebab-case</strong>: marginTop instead of margin-top
+  - Inline styling is slow. Use this for prototyping then move your styling to its own CSS file. 
+```
+  const style = {
+    border: "1px solid red", marginTop: "10px"
+  };
+  <p style={style}>Hello!</p>
+```
 
-## Available Scripts
+- Class names in components 
+  - "class" is a reserved js keyword. Use "className" instead. 
+```
+  <p class="my-css-class-selector">Hello</p> //Wrong!
+  <p className="my-css-class-selector">Hello</p> //Correct. 
+```
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Use short circuit evaluation for conditional rendering. 
+```
+  let componentCanRender = true;
+  render(){
+    return {componentCanRender && <p>Hello</p>};
+  }
+```
