@@ -9,7 +9,7 @@ export default class ProgressButtonGroup extends Component {
     return (
       <Stack gap="3">
         <Button variant="success" size="lg" onClick={disabled ? null : handler}>
-          Add {this.props.buttonName} information
+          Add information
         </Button>
         <Button
           variant="primary"

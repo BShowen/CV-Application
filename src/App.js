@@ -220,7 +220,6 @@ export default class App extends Component {
                 {canDisplayForm && this.currentStepForm()}
                 {canDisplayNavigationButtons && (
                   <ProgressButtonGroup
-                    buttonName={this.currentStepForm().type.name.toLowerCase()}
                     onAddClick={{
                       handler: this.showForm,
                       disabled: isFormDisabled,
