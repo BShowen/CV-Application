@@ -5,6 +5,7 @@
 .responsive-row-height {
   flex-grow: 1;
   flex-direction: column;
+  justify-content: flex-start;
 }
 
 @media only screen and (min-width: 769px) { /* Devices 769px and up */
@@ -14,5 +15,6 @@
 
   .responsive-row-height{
     flex-direction: row;
+    justify-content: center;
   }
 }

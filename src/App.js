@@ -197,16 +197,25 @@ export default class App extends Component {
     if (!this.state.complete) {
       return (
         <Container style={containerStyle} fluid className="h-100">
-          <Row className="responsive-row-height">
+          <Row className="responsive-row-height bg-light">
             <Col
               className="p-0 responsive-col-height bg-light"
               sm={12}
               md={2}
               lg={3}
+              xl={3}
+              xxl={1}
             >
               <SideNav progress={this.state.progress} />
             </Col>
-            <Col className="p-10 mh-100 overflow-scroll" sm={12} md={8} lg={6}>
+            <Col
+              className="p-10 mh-100 overflow-scroll"
+              sm={12}
+              md={10}
+              lg={6}
+              xl={6}
+              xxl={4}
+            >
               <Stack gap={3}>
                 {canDisplayForm && this.currentStepForm()}
                 {canDisplayNavigationButtons && (
@@ -234,7 +243,7 @@ export default class App extends Component {
                 )}
               </Stack>
             </Col>
-            <Col className="p-0" sm={12} md={2} lg={3}></Col>
+            <Col className="p-0" sm={12} md={12} lg={3} xl={3} xxl={1}></Col>
           </Row>
         </Container>
       );

@@ -10,11 +10,18 @@ export default class CurriculumVitae extends Component {
 
     return (
       <Container className="w-100 h-100" fluid>
-        <Row className="d-flex flex-row justify-content-center pt-3 h-75">
-          <Col sm={12} md={2} className="bg-primary text-light p-3">
+        <Row className="d-flex flex-row justify-content-center pt-3 ps-2 pe-2 h-75">
+          <Col
+            sm={12}
+            md={4}
+            lg={3}
+            xl={3}
+            xxl={2}
+            className="bg-primary text-light p-3"
+          >
             <CVPersonalDisplay user={user} />
           </Col>
-          <Col sm={12} md={4} className="bg-light p-3">
+          <Col sm={12} md={8} lg={6} xl={4} xxl={3} className="bg-light p-3">
             <CVEducationDisplay data={this.props.data[1]} />
             <CVExperienceDisplay data={this.props.data[2]} />
           </Col>
